@@ -21,7 +21,7 @@ public class HelloController {
 
     @GetMapping("/")
     String hello() {
-        return "Hello, World!";
+        return "Implementation of Postgres LTree in Spring Boot app!";
     }
 
     @GetMapping("/path")
@@ -35,41 +35,41 @@ public class HelloController {
     @GetMapping("/countByPath")
     ResponseEntity<?> countByPath() {
 
-        return ResponseEntity.ok().body(treeRepository.countByPath("'A'"));
+        return ResponseEntity.ok().body(treeRepository.countByPath("A"));
     }
 
     @GetMapping("/deleteAllByPath")
     ResponseEntity<?> deleteAllByPath() {
 
-        treeRepository.deleteAllByPath("'A.C'");
+        treeRepository.deleteAllByPath("A.C");
         return ResponseEntity.ok().body("deleted");
     }
 
     @GetMapping("/moveTreeOneLevelUp")
     ResponseEntity<?> moveTreeOneLevelUp() {
 
-        treeRepository.moveTreeOneLevelUp("'A.C'");
+        treeRepository.moveTreeOneLevelUp("A.C");
         return ResponseEntity.ok().body("moveTreeOneLevelUp");
     }
 
     @GetMapping("/moveRootTreeDown")
     ResponseEntity<?> moveRootTreeDown() {
 
-        treeRepository.moveRootTreeDown("'A.B.G'", "'C'");
+        treeRepository.moveRootTreeDown("A.B.G", "C");
         return ResponseEntity.ok().body("moveRootTreeDown");
     }
 
     @GetMapping("/moveNonRootTreeDown")
     ResponseEntity<?> moveNonRootTreeDown() {
 
-        treeRepository.moveNonRootTreeDown("'A.B.G'", "'A.C'");
+        treeRepository.moveNonRootTreeDown("A.B.G", "A.C");
         return ResponseEntity.ok().body("moveNonRootTreeDown");
     }
 
     @GetMapping("/copyTree")
     ResponseEntity<?> copyTree() {
 
-        treeRepository.copyTree("'A.B.G'", "'A.C'");
+        treeRepository.copyTree("A.B.G", "A.C");
         return ResponseEntity.ok().body("copyTree");
     }
 

@@ -12,36 +12,35 @@ import java.util.List;
 @Repository
 public interface TreeRepository extends PagingAndSortingRepository<Tree, Long> {
 
-    //@Query(value = "SELECT * FROM Tree WHERE path <@ '" + ":pathToSearch" +"'", nativeQuery = true)
-    @Query(value = "SELECT * FROM Tree WHERE path <@ 'A'", nativeQuery = true)
+    @Query(value = "SELECT * FROM Tree WHERE path <@ CAST(:pathToSearch AS ltree)", nativeQuery = true)
     List<Tree> findAllByPath(@Param("pathToSearch") String pathToSearch);
 
-    @Query(value = "SELECT COUNT(*) FROM Tree WHERE path <@ 'A'", nativeQuery = true)
+    @Query(value = "SELECT COUNT(*) FROM Tree WHERE path <@ CAST(:pathToSearch AS ltree)", nativeQuery = true)
     Long countByPath(@Param("pathToSearch") String pathToSearch);
 
     @Modifying
     @Transactional
-    @Query(value = "DELETE FROM Tree WHERE path <@ 'A.C'", nativeQuery = true)
+    @Query(value = "DELETE FROM Tree WHERE path <@ CAST(:pathToDelete AS ltree)", nativeQuery = true)
     void deleteAllByPath(@Param("pathToDelete") String pathToDelete);
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE Tree SET path = subpath(path, nlevel('A.C')-1) WHERE path <@ 'A.C'", nativeQuery = true)
+    @Query(value = "UPDATE Tree SET path = subpath(path, nlevel('A.C')-1) WHERE path <@ CAST(:pathToMove AS ltree)", nativeQuery = true)
     void moveTreeOneLevelUp(@Param("pathToMove") String pathToMove);
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE Tree SET path = 'A.B.G' || path WHERE path <@ 'C'", nativeQuery = true)
+    @Query(value = "UPDATE Tree SET path = CAST(:destinationPath AS ltree) || path WHERE path <@ CAST(:sourcePath AS ltree)", nativeQuery = true)
     void moveRootTreeDown(@Param("destinationPath") String destinationPath, @Param("sourcePath") String sourcePath);
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE Tree SET path = 'A.B.G' || subpath(path, 1) WHERE path <@ 'A.C'", nativeQuery = true)
+    @Query(value = "UPDATE Tree SET path = CAST(:destinationPath AS ltree) || subpath(path, 1) WHERE path <@ CAST(:sourcePath AS ltree)", nativeQuery = true)
     void moveNonRootTreeDown(@Param("destinationPath") String destinationPath, @Param("sourcePath") String sourcePath);
 
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO tree (letter, path) (SELECT letter, 'A.B.G' || subpath(path, 1) FROM tree WHERE 'A.C' @> path)", nativeQuery = true)
+    @Query(value = "INSERT INTO tree (letter, path) (SELECT letter, CAST(:destinationPath AS ltree) || subpath(path, 1) FROM tree WHERE CAST(:sourcePath AS ltree) @> path)", nativeQuery = true)
     void copyTree(@Param("destinationPath") String destinationPath, @Param("sourcePath") String sourcePath);
 
     @Query(value = "SELECT letter, CAST(path as TEXT), nlevel(path) FROM Tree", nativeQuery = true)
@@ -53,7 +52,8 @@ public interface TreeRepository extends PagingAndSortingRepository<Tree, Long> {
         String getPath();
         Integer getNlevel();
     }
-/*
+
+    /*
     @Query(value = "SELECT letter FROM Tree", nativeQuery = true)
     List<Letter> letter();
 
