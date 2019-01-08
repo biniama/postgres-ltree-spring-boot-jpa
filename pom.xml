@@ -43,6 +43,14 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
+		<!--Hibernate types-->
+		<!--https://github.com/vladmihalcea/hibernate-types-->
+		<dependency>
+			<groupId>com.vladmihalcea</groupId>
+			<artifactId>hibernate-types-52</artifactId>
+			<version>2.4.0</version>
+		</dependency>
     </dependencies>
 
 	<build>

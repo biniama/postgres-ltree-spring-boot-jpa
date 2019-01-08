@@ -1,8 +1,8 @@
 -- Insert values
-insert into tree (letter, path) values ('A', 'A');
-insert into tree (letter, path) values ('B', 'A.B');
-insert into tree (letter, path) values ('C', 'A.C');
-insert into tree (letter, path) values ('D', 'A.C.D');
-insert into tree (letter, path) values ('E', 'A.C.E');
-insert into tree (letter, path) values ('F', 'A.C.F');
-insert into tree (letter, path) values ('G', 'A.B.G');
+/*insert into facts values ('order_1', false, 0, '{}');
+insert into facts values ('order_1.orderitem_1', true, 0,
+                          array['{"placements": ["ad_placement__shelf_sort_managed"], "visible": true, "boost": 50}']::jsonb[]);
+
+insert into facts values ('order_2.orderitem_2.content_3', false, 0, '{}');
+insert into facts values ('order_2.orderitem_2.content_4', true, 100, '{}');
+*/
