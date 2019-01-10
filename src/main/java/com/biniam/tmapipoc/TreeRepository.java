@@ -1,4 +1,4 @@
-package com.bonial.tmapipoc;
+package com.biniam.tmapipoc;
 
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

@@ -1,4 +1,4 @@
-package com.bonial.tmapipoc;
+package com.biniam.tmapipoc;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

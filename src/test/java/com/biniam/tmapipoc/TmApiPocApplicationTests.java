@@ -1,4 +1,4 @@
-package com.bonial.tmapipoc;
+package com.biniam.tmapipoc;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

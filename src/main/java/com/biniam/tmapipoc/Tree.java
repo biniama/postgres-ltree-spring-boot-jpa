@@ -1,4 +1,4 @@
-package com.bonial.tmapipoc;
+package com.biniam.tmapipoc;
 
 import lombok.Data;
 import org.hibernate.annotations.Type;
@@ -18,6 +18,5 @@ public class Tree {
     private String letter;
 
     @Column(name = "path", nullable = false, columnDefinition = "ltree")
-    @Type(type = "com.bonial.tmapipoc.LTreeType")
     private String path;
 }
